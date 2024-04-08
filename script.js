@@ -108,11 +108,15 @@ equals.addEventListener('click', function () {
                 display.textContent = operate(number1, number2, operator);
 
                 //display.textContent = operate(number1, number2, operator);
+            } else {
+                secondString = secondArray.join('');
+                number2 = parseInt(secondString);
             }
             // console.log("Second array: " + secondArray);
         }
     }
 
+    display.textContent = operate(number1, number2, operator);
     console.log(array);
 
 })
