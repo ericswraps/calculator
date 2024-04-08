@@ -75,11 +75,44 @@ equals.addEventListener('click', function () {
             number1 = parseInt(numberOneString);
             let secondArray = array.slice(i + 1, array.length - 1);
             console.log("Second array: " + secondArray);
-            let numberTwoString = secondArray.join('');
-            number2 = parseInt(numberTwoString);
+            if (secondArray.includes("X") ||
+                secondArray.includes("-") ||
+                secondArray.includes("+") ||
+                secondArray.includes("/")
+            ) {
+                console.log("multiple operators");
+                const operators = ['X', '-', '/', '+'];
+                let indices = [];
+                operators.forEach(value => {
+                    const index = secondArray.indexOf(value);
+                    if (index !== -1) {
+                        indices.push(index);
+                    }
+                });
+                indices.reverse();
+                console.log(indices);
+                let indexOfOperator = indices[0];
+                console.log("Operator index: hopefully: " + indexOfOperator)
+                console.log("Second number to add " + secondArray.slice(0, indexOfOperator));
+                let midNumString = secondArray.slice(0, indexOfOperator).join('');
+                let midNum = parseInt(midNumString);
+                number1 = operate(number1, midNum, operator);
+                console.log("hopefully updated first part: " + number1);
+                console.log("number 1 in here " + number1);
+                let editedArray = secondArray.slice(indexOfOperator + 1);
+                let numberTwoString = editedArray.join('');
+                number2 = parseInt(numberTwoString);
+                console.log("Second part: " + number2);
+                console.log("number 1: " + number1);
+                operator = secondArray[indexOfOperator];
+                display.textContent = operate(number1, number2, operator);
+
+                //display.textContent = operate(number1, number2, operator);
+            }
+            // console.log("Second array: " + secondArray);
         }
     }
-    display.textContent = operate(number1, number2, operator);
+
     console.log(array);
 
 })
